@@ -1,0 +1,30 @@
+{{{
+  exports({ to: app.configPath('turnstile.ts') })
+}}}
+import env from '#start/env'
+import { defineConfig } from 'adonis-turnstile'
+
+const turnstileConfig = defineConfig({
+  /*
+  |--------------------------------------------------------------------------
+  | Site Key
+  |--------------------------------------------------------------------------
+  |
+  | Your public Site site key
+  |
+  */
+  siteKey: env.get('TURNSTILE_SITE_KEY'),
+
+  /*
+  |--------------------------------------------------------------------------
+  | Secret Key
+  |--------------------------------------------------------------------------
+  |
+  | Your Secret Key 
+  | * Do not share your secretKey with anyone
+  |
+  */
+  secretKey: env.get('TURNSTILE_SECRET_KEY'),
+})
+
+export default turnstileConfig
