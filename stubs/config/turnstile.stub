@@ -2,7 +2,7 @@
   exports({ to: app.configPath('turnstile.ts') })
 }}}
 import env from '#start/env'
-import { defineConfig } from 'adonis-turnstile'
+import { defineConfig } from 'adonis-cf-turnstile'
 
 const turnstileConfig = defineConfig({
   /*

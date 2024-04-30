@@ -35,7 +35,10 @@ export async function configure(command: ConfigureCommand) {
     /**
      * Register provider
      */
-    await codemods.registerMiddleware('router', [
-      { path: `${packageName}/middleware/turnstile_middleware` },
-    ])
+    await codemods.registerMiddleware('named', [
+      {
+          path: `${packageName}/middleware/turnstile_middleware`,
+          name: 'turnstile',
+      },
+  ])
 }
