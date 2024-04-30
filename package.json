@@ -1,5 +1,5 @@
 {
-  "name": "adonis-turnstile",
+  "name": "adonis-cf-turnstile",
   "version": "0.0.1",
   "description": "AdonisJS addon for Cloudflare turnstile",
   "main": "build/index.js",
