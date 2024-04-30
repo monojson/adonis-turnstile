@@ -1,3 +1,3 @@
-import { getDirname } from '@poppinss/utils'
+import { joinToURL } from '@poppinss/utils'
 
-export const stubsRoot = getDirname(import.meta.url)
+export const stubsRoot = joinToURL(import.meta.url, 'stubs')
