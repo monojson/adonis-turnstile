@@ -1,32 +1,37 @@
 import got from "got"
-import { TurnstileResponse, CloudflareTurnstileResponse, TurnstileConfig } from "../types.js"
-import { HttpContext } from "@adonisjs/core/http"
+import { TurnstileResponse, TurnstileConfig } from "../types.js"
 
+/**
+ * See more info about Cloudflare server-side validation: https://developers.cloudflare.com/turnstile/get-started/server-side-validation/
+ */
 export default class TurnstileService {
     constructor(protected config: TurnstileConfig) {}
 
-    public async check(ctx: HttpContext): Promise<TurnstileResponse> {
-        const token = ctx.request.input('cf-turnstile-response')
-        const ip = ctx.request.header('cf-connecting-ip')
+    public async check(token: string): Promise<TurnstileResponse> {
+        if (!token) {
+            return {
+                success: false, 
+                errorCodes: ['bad-request']
+            }
+        }
 
-        const { body } = await got.post<CloudflareTurnstileResponse>(
+        const body = await got.post(
           'https://challenges.cloudflare.com/turnstile/v0/siteverify',
           {
             json: {
               secret: this.config.secretKey,
               response: token,
-              remoteip: ip,
             }
           }
-        )
-
+        ).text()
+        const decodeBody = JSON.parse(body)
         return {
-          success: Boolean(body.success),
-          challengeTimestamp: body.challenge_ts,
-          hostname: body.hostname,
-          errorCodes: body['error-codes'],
-          action: body.action,
-          cdata: body.cdata,
+          success: Boolean(decodeBody.success),
+          challengeTimestamp: decodeBody.challenge_ts,
+          hostname: decodeBody.hostname,
+          errorCodes: decodeBody['error-codes'],
+          action: decodeBody.action,
+          cdata: decodeBody.cdata,
         } as TurnstileResponse
     }
 }

@@ -14,15 +14,6 @@ export type TurnstileErrorCode =
   | 'timeout-or-duplicate'
   | 'internal-error'
 
-export interface CloudflareTurnstileResponse {
-  'success': boolean
-  'challenge_ts': string
-  'hostname': string
-  'error-codes': TurnstileErrorCode[]
-  'action': string
-  'cdata': string
-}
-
 export interface TurnstileResponse {
   /** true when the token is valid */
   success: boolean
