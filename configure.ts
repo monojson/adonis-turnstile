@@ -31,14 +31,4 @@ export async function configure(command: ConfigureCommand) {
     await codemods.updateRcFile((rcFile) => {
         rcFile.addProvider(`${packageName}/providers/turnstile_provider`)
     })
-
-    /**
-     * Register provider
-     */
-    await codemods.registerMiddleware('named', [
-      {
-          path: `${packageName}/middleware/turnstile_middleware`,
-          name: 'turnstile',
-      },
-  ])
 }

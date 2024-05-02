@@ -1,6 +1,6 @@
 {
   "name": "adonis-cf-turnstile",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Cloudflare turnstile addon for AdonisJS V6",
   "main": "build/index.js",
   "engines": {
@@ -16,7 +16,6 @@
     "./errors": "./build/errors.js",
     "./services/main": "./build/services/main.js",
     "./services/turnstile": "./build/services/turnstile.js",
-    "./middleware/turnstile_middleware": "./build/middleware/turnstile_middleware.js",
     "./providers/turnstile_provider": "./build/providers/turnstile_provider.js"
   },
   "scripts": {
@@ -67,7 +66,6 @@
       "./errors.ts",
       "./types.ts",
       "./services/**",
-      "./middleware/**",
       "./providers/**"
     ],
     "outDir": "./build",
